@@ -11,11 +11,7 @@ class Movies extends Component {
         movies: [],
         pageSize : 4,
         currentPage : 1,
-        currentGenre : 'All Genres',
-        sortColumn : {
-            sortWith : 'title',
-            order : 'asc'
-        }
+        currentGenre : 'All Genres'
     }
 
     componentDidMount(){
@@ -63,34 +59,22 @@ class Movies extends Component {
         this.setState({ currentGenre : genreName });
     }
 
-    handelSort = sortWith => {
-        this.setState({sortColumn : { sortWith }});
+    handelSort = ()=>{
+
     }
 
-    getPagedData = ( ) => {
-        const { movies, pageSize, currentPage, currentGenre, sortColumn } = this.state; 
+    render() {
+        const { movies, pageSize, currentPage, currentGenre} = this.state;
         const genreMovies = movies.filter( m => {
             return m.genre.name === currentGenre || currentGenre === 'All Genres';
-        }).sort(( m1, m2 )=>{
-            let testMovie1Key = ( sortColumn.sortWith !== 'genre') ? m1[sortColumn.sortWith] : m1[sortColumn.sortWith].name;
-            let testMovie2Key = ( sortColumn.sortWith !== 'genre') ? m2[sortColumn.sortWith] : m2[sortColumn.sortWith].name;
-            if(testMovie1Key < testMovie2Key) return -1;
-            if(testMovie1Key > testMovie2Key) return  1;
-            return 0;
         });
-        
         const paginatedMovies = paginate( genreMovies, currentPage, pageSize );
         const size = ( currentGenre === 'All Genres' ) ? movies.length : genreMovies.length;
-        
-        return {
-            size            : size,
-            paginatedMovies : paginatedMovies
+   
+        if( size === 0 ){
+            return <p>there are No movies in the dateBase.</p>;
         }
-    }
-    
-    render() {
-        const {  pageSize, currentPage, currentGenre } = this.state;        
-        const { size, paginatedMovies } = this.getPagedData();
+
         return (
             <div className="row">
                 <div className="col-9">

@@ -9,15 +9,15 @@ function App() {
   return (
     <React.Fragment>
       <NavBar />
-      <Route path="/movies" render = {()=>
+      <Route path="/movies" render = { () => {
         <div className='row'>
           <div className="col-1"></div>
-          <div className="col-10">
+          <div>
             <Movies />
           </div>
-          <div className="col-1"></div>          
+          <div className="col-1"></div> 
         </div>
-      }/>
+      }}/>
       <Route path="/clients" component={Clients}/>
       <Route path="/rentals" component={Rentals}/>
     </React.Fragment>

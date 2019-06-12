@@ -7,7 +7,7 @@ const Like = ({ liked, onClick }) => {
     return (
         <i 
             className={clasdNameData} 
-            aria-hidden="true"
+            aria-hidden="true" 
             onClick={onClick}
             style={{ cursor: 'pointer' }}
         ></i>

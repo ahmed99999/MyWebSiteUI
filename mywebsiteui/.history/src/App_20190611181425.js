@@ -12,10 +12,7 @@ function App() {
       <Route path="/movies" render = {()=>
         <div className='row'>
           <div className="col-1"></div>
-          <div className="col-10">
-            <Movies />
-          </div>
-          <div className="col-1"></div>          
+          <Movies className="col-"/>
         </div>
       }/>
       <Route path="/clients" component={Clients}/>

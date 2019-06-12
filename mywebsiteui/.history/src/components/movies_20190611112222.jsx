@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getMovies } from './../services/fakeMovieService';
-import MoviesTable from './moviesTable';
+import Movie from './movie';
 import Pagination from './comon/pagination';
 import { paginate } from '../utils/paginate';
 import ListGroup from './comon/listGroup';
@@ -11,11 +11,7 @@ class Movies extends Component {
         movies: [],
         pageSize : 4,
         currentPage : 1,
-        currentGenre : 'All Genres',
-        sortColumn : {
-            sortWith : 'title',
-            order : 'asc'
-        }
+        currentGenre : 'All Genres'
     }
 
     componentDidMount(){
@@ -63,46 +59,52 @@ class Movies extends Component {
         this.setState({ currentGenre : genreName });
     }
 
-    handelSort = sortWith => {
-        this.setState({sortColumn : { sortWith }});
-    }
+    handelSort = ()=>{
 
-    getPagedData = ( ) => {
-        const { movies, pageSize, currentPage, currentGenre, sortColumn } = this.state; 
-        const genreMovies = movies.filter( m => {
-            return m.genre.name === currentGenre || currentGenre === 'All Genres';
-        }).sort(( m1, m2 )=>{
-            let testMovie1Key = ( sortColumn.sortWith !== 'genre') ? m1[sortColumn.sortWith] : m1[sortColumn.sortWith].name;
-            let testMovie2Key = ( sortColumn.sortWith !== 'genre') ? m2[sortColumn.sortWith] : m2[sortColumn.sortWith].name;
-            if(testMovie1Key < testMovie2Key) return -1;
-            if(testMovie1Key > testMovie2Key) return  1;
-            return 0;
-        });
-        
-        const paginatedMovies = paginate( genreMovies, currentPage, pageSize );
-        const size = ( currentGenre === 'All Genres' ) ? movies.length : genreMovies.length;
-        
-        return {
-            size            : size,
-            paginatedMovies : paginatedMovies
-        }
     }
     
     render() {
-        const {  pageSize, currentPage, currentGenre } = this.state;        
-        const { size, paginatedMovies } = this.getPagedData();
+        const { movies, pageSize, currentPage, currentGenre} = this.state;
+        const genreMovies = movies.filter( m => {
+            return m.genre.name === currentGenre || currentGenre === 'All Genres';
+        });
+        const paginatedMovies = paginate( genreMovies, currentPage, pageSize );
+        const size = ( currentGenre === 'All Genres' ) ? movies.length : genreMovies.length;
+   
+        if( size === 0 ){
+            return <p>there are No movies in the dateBase.</p>;
+        }
+
         return (
             <div className="row">
                 <div className="col-9">
                     <p>showing {paginatedMovies.length} movies in the dataBase.</p>
                     <button className="btn btn-primary" onClick={() => this.handelReset()}>Reset</button>
-                    <MoviesTable 
-                        handelDecrement={(movie)=>this.handelDecrement(movie)}
-                        handelIncrement={(movie)=>this.handelIncrement(movie)}
-                        handleDelete={(movie)=>this.handleDelete(movie)}
-                        paginatedMovies={paginatedMovies}
-                        handelSort={key=>this.handelSort(key)}
-                    />
+                    <table className="table">
+                        <thead>
+                            <tr key = '-1'>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Stock</th>
+                                <th>Rate</th>
+                                <th />
+                                <th />
+                                <th />
+                                <th />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginatedMovies.map( (movie) => (
+                                <Movie 
+                                    key = { movie._id } 
+                                    movie = { movie } 
+                                    onDelete = { ()=>this.handleDelete(movie) }
+                                    onIncrement = { ()=>this.handelIncrement(movie) }
+                                    onDecrement = { ()=>this.handelDecrement(movie) }
+                                />
+                            ))}
+                        </tbody>
+                    </table>
                     <Pagination 
                         itemsCount={size} 
                         pageSize={pageSize}
