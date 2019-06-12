@@ -21,7 +21,7 @@ class Movie extends Component {
         const { isLiked } = this.state; 
         return (
             <tr id={movie._id} >
-                <td><Link to={`/movies/${movie._id}`}>{movie.title}</Link></td>
+                <td><Link to = "/movies/${movie._id}">{movie.title}</Link></td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
@@ -30,7 +30,7 @@ class Movie extends Component {
                 <td><button className="btn btn-secondary" onClick={onIncrement}> + </button></td>
                 <td><button className="btn btn-secondary" onClick={onDecrement} disabled={movie.numberInStock ? '' : 'disabled'}> - </button></td>
             </tr>
-        );
+         );
     }
 }
  

@@ -30,7 +30,7 @@ class Movie extends Component {
                 <td><button className="btn btn-secondary" onClick={onIncrement}> + </button></td>
                 <td><button className="btn btn-secondary" onClick={onDecrement} disabled={movie.numberInStock ? '' : 'disabled'}> - </button></td>
             </tr>
-        );
+         );
     }
 }
  

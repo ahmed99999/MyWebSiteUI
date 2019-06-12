@@ -5,16 +5,12 @@ import NavBar from './components/navBar';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import Rentals from './components/rentals';
 import NotFound from './components/notFound';
-import SaveMovie from './components/saveMovie';
-import LoginForm from './components/loginForm';
 
 function App() {
   return (
     <React.Fragment>
       <NavBar />
       <Switch>
-        <Route path="/login" component={LoginForm}/>
-        <Route path="/movies/:id" component={SaveMovie} />
         <Route path="/movies" render = {()=>
           <div className='row'>
             <div className="col-1"></div>
@@ -27,7 +23,7 @@ function App() {
         <Route path="/clients" component={Clients}/>
         <Route path="/rentals" component={Rentals}/>
         <Route path="/not-found" component={NotFound} />
-        <Redirect from="/" exact to="/movies" />
+        <Redirect from="/" to="/movies" />
         <Redirect to="/not-found" />
       </Switch>
     </React.Fragment>

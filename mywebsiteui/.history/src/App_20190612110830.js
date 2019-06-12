@@ -5,16 +5,12 @@ import NavBar from './components/navBar';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import Rentals from './components/rentals';
 import NotFound from './components/notFound';
-import SaveMovie from './components/saveMovie';
-import LoginForm from './components/loginForm';
 
 function App() {
   return (
     <React.Fragment>
       <NavBar />
       <Switch>
-        <Route path="/login" component={LoginForm}/>
-        <Route path="/movies/:id" component={SaveMovie} />
         <Route path="/movies" render = {()=>
           <div className='row'>
             <div className="col-1"></div>
