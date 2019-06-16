@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import LoginInput from './comon/LoginInput';
 import Joi from 'joi-browser';
-import Form from './comon/form';
+// import Form from './comon/form';
 
-class LoginForm extends Form {
+class LoginForm extends Component {
     
     state = {
         data : {
@@ -11,7 +11,7 @@ class LoginForm extends Form {
             userPassword : '' 
         },
         errors: {}
-    };        
+    };
 
     schema = {
         userEmail    : Joi.string().required().label('User Email'),

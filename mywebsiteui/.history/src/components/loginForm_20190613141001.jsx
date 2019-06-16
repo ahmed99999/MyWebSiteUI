@@ -11,11 +11,11 @@ class LoginForm extends Form {
             userPassword : '' 
         },
         errors: {}
-    };        
+    };
 
     schema = {
-        userEmail    : Joi.string().required().label('User Email'),
-        userPassword : Joi.string().required().label('Password')
+        userEmail     : Joi.string().required().label('User Email'),
+        userPassword  : Joi.string().required().label('Password')
     };
 
     doSubmit = () => {

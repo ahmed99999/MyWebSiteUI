@@ -5,13 +5,16 @@ import Form from './comon/form';
 
 class LoginForm extends Form {
     
-    state = {
-        data : {
-            userEmail : '',
-            userPassword : '' 
-        },
-        errors: {}
-    };        
+    constructor( props ){
+        super(props);
+        state = {
+            data : {
+                userEmail : '',
+                userPassword : '' 
+            },
+            errors: {}
+        };
+    }
 
     schema = {
         userEmail    : Joi.string().required().label('User Email'),

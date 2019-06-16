@@ -11,7 +11,7 @@ class LoginForm extends Form {
             userPassword : '' 
         },
         errors: {}
-    };        
+    };
 
     schema = {
         userEmail    : Joi.string().required().label('User Email'),
@@ -56,7 +56,7 @@ class LoginForm extends Form {
                         <button 
                             type="submit"
                             className="btn btn-primary"
-                            disabled = {this.validate()}
+                            disabled = {this.validate}
                         >
                             Submit
                         </button>

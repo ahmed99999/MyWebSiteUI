@@ -56,7 +56,7 @@ class LoginForm extends Form {
                         <button 
                             type="submit"
                             className="btn btn-primary"
-                            disabled = {this.validate()}
+                            disabled = {super.validate()}
                         >
                             Submit
                         </button>

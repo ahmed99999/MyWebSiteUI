@@ -1,30 +1,66 @@
 import React, { Component } from 'react';
 import LoginInput from './comon/LoginInput';
 import Joi from 'joi-browser';
-import Form from './comon/form';
 
-class LoginForm extends Form {
+class LoginForm extends Component {
     
     state = {
-        data : {
+        account : {
             userEmail : '',
             userPassword : '' 
         },
         errors: {}
-    };        
-
-    schema = {
-        userEmail    : Joi.string().required().label('User Email'),
-        userPassword : Joi.string().required().label('Password')
     };
 
-    doSubmit = () => {
-          // call to the server
-          console.log('submitted');
+    schema = {
+        userEmail     : Joi.string().required().label('User Email'),
+        userPassword  : Joi.string().required().label('Password')
+    };
+
+    validate = () => {
+        const options = { abortEarly: false };
+        const errors = {};
+        const { error } = Joi.validate( this.state.account, this.schema, options );
+        if ( !error ) return null;
+        
+        error.details.forEach( detail => {
+            let key = detail.path[0];
+            errors[key] = detail.message;
+        });
+        return errors;
+    }
+
+    validateProperty = ({ name, value }) => {
+        const obj = { [name] : value };
+        const schema = {[name]: this.schema[name]};
+        const { error } = Joi.validate( obj, schema );
+        return ( !error ) ? null : error.details[0].message;
+    }
+
+    handleChange = ({currentTarget : input}) => {
+        const errors = { ...this.state.errors };
+        const errorMessage = this.validateProperty(input);
+        if (errorMessage) errors[input.name] = errorMessage;
+        else delete errors[input.name];
+
+        const account = {...this.state.account}
+        account[input.name] = input.value;
+        this.setState({ account, errors });
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+
+        const errors = this.validate();
+        this.setState({ errors : errors || {} });
+        
+        if (errors) return;
+        // call to the server
+        console.log('submitted');
     }
 
     render() {
-        const { data } = this.state;
+        const { account } = this.state;
         const { errors } = this.state;
         return (
             <div className="row">
@@ -33,7 +69,7 @@ class LoginForm extends Form {
                     <h1>Login</h1>
                     <form onSubmit={this.handleSubmit}>
                         <LoginInput
-                            value={data.userEmail}
+                            value={account.userEmail}
                             type="email"
                             name="userEmail"
                             onChange={this.handleChange}
@@ -41,7 +77,7 @@ class LoginForm extends Form {
                             error={errors.userEmail}
                         />
                         <LoginInput
-                            value={data.userPassword}
+                            value={account.userPassword}
                             type="password"
                             name="userPassword"
                             onChange={this.handleChange}
@@ -57,9 +93,7 @@ class LoginForm extends Form {
                             type="submit"
                             className="btn btn-primary"
                             disabled = {this.validate()}
-                        >
-                            Submit
-                        </button>
+                        >Submit</button>
                     </form>
                 </div>
                 <div className="col-5"></div>

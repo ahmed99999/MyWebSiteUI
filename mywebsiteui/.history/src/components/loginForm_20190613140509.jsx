@@ -6,16 +6,16 @@ import Form from './comon/form';
 class LoginForm extends Form {
     
     state = {
-        data : {
+        account : {
             userEmail : '',
             userPassword : '' 
         },
         errors: {}
-    };        
+    };
 
     schema = {
-        userEmail    : Joi.string().required().label('User Email'),
-        userPassword : Joi.string().required().label('Password')
+        userEmail     : Joi.string().required().label('User Email'),
+        userPassword  : Joi.string().required().label('Password')
     };
 
     doSubmit = () => {
@@ -24,7 +24,7 @@ class LoginForm extends Form {
     }
 
     render() {
-        const { data } = this.state;
+        const { account } = this.state;
         const { errors } = this.state;
         return (
             <div className="row">
@@ -33,7 +33,7 @@ class LoginForm extends Form {
                     <h1>Login</h1>
                     <form onSubmit={this.handleSubmit}>
                         <LoginInput
-                            value={data.userEmail}
+                            value={account.userEmail}
                             type="email"
                             name="userEmail"
                             onChange={this.handleChange}
@@ -41,7 +41,7 @@ class LoginForm extends Form {
                             error={errors.userEmail}
                         />
                         <LoginInput
-                            value={data.userPassword}
+                            value={account.userPassword}
                             type="password"
                             name="userPassword"
                             onChange={this.handleChange}
@@ -57,9 +57,7 @@ class LoginForm extends Form {
                             type="submit"
                             className="btn btn-primary"
                             disabled = {this.validate()}
-                        >
-                            Submit
-                        </button>
+                        >Submit</button>
                     </form>
                 </div>
                 <div className="col-5"></div>

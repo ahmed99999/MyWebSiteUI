@@ -11,7 +11,7 @@ class LoginForm extends Form {
             userPassword : '' 
         },
         errors: {}
-    };        
+    };
 
     schema = {
         userEmail    : Joi.string().required().label('User Email'),

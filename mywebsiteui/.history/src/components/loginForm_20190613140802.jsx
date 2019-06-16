@@ -11,11 +11,11 @@ class LoginForm extends Form {
             userPassword : '' 
         },
         errors: {}
-    };        
+    };
 
     schema = {
-        userEmail    : Joi.string().required().label('User Email'),
-        userPassword : Joi.string().required().label('Password')
+        userEmail     : Joi.string().required().label('User Email'),
+        userPassword  : Joi.string().required().label('Password')
     };
 
     doSubmit = () => {
@@ -57,9 +57,7 @@ class LoginForm extends Form {
                             type="submit"
                             className="btn btn-primary"
                             disabled = {this.validate()}
-                        >
-                            Submit
-                        </button>
+                        >Submit</button>
                     </form>
                 </div>
                 <div className="col-5"></div>

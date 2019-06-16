@@ -5,13 +5,20 @@ import Form from './comon/form';
 
 class LoginForm extends Form {
     
-    state = {
-        data : {
-            userEmail : '',
-            userPassword : '' 
-        },
-        errors: {}
-    };        
+    constructor( props ){
+        super(props);
+        this.state = {
+            data : {
+                userEmail : '',
+                userPassword : '' 
+            },
+            errors: {}
+        };
+        this.validate = () => super.validate(); 
+        this.validateProperty = () => super.validateProperty();
+        this.handleSubmit = () => super.handleSubmit();
+        this.handleChange = () => super.handleChange();
+    }
 
     schema = {
         userEmail    : Joi.string().required().label('User Email'),
@@ -56,7 +63,7 @@ class LoginForm extends Form {
                         <button 
                             type="submit"
                             className="btn btn-primary"
-                            disabled = {this.validate()}
+                            disabled = {super.validate()}
                         >
                             Submit
                         </button>

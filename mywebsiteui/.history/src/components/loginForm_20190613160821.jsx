@@ -26,6 +26,7 @@ class LoginForm extends Form {
     render() {
         const { data } = this.state;
         const { errors } = this.state;
+        const that = this;
         return (
             <div className="row">
                 <div className="col-1"></div>
@@ -56,7 +57,7 @@ class LoginForm extends Form {
                         <button 
                             type="submit"
                             className="btn btn-primary"
-                            disabled = {this.validate()}
+                            disabled = {that.validate()}
                         >
                             Submit
                         </button>
