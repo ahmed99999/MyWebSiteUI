@@ -45,7 +45,7 @@ class MovieDetails extends Form {
             numberInStock: movie.numberInStock,
             dailyRentalRate: movie.dailyRentalRate
         };
-    };
+    }
 
     schema = {
         _id: Joi.string(),

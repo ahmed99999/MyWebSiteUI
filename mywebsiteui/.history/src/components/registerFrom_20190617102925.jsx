@@ -23,7 +23,7 @@ class RegisterFrom extends Form {
     doSubmit = () => {
         // sever call
         console.log('registered');
-    };
+    }
 
     render() {
         return (

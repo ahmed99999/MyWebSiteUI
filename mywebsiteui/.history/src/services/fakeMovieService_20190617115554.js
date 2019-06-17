@@ -1,4 +1,5 @@
 import { getGenres } from "./fakeGenreService";
+import { genres } from './../../.history/src/services/fakeGenreService_20190605134231';
 
 const movies = [
   {
@@ -78,13 +79,16 @@ export function getMovie(id) {
 export function saveMovie(movie) {
   let movieInDb = movies.find(m => m._id === movie._id) || {};
   movieInDb.title = movie.title;
-
-  movieInDb.genre = getGenres().find( g => g._id === movie.genreId );
+  const genres = getGenres();
+  const genre = genres.filter( g => {
+    return g._id === movie.genreId ;
+  })[0];
+  // movieInDb.genre = getGenres().find(g => g._id === movie.genreId);
   movieInDb.numberInStock = movie.numberInStock;
   movieInDb.dailyRentalRate = movie.dailyRentalRate;
 
   if (!movieInDb._id) {
-    movieInDb._id = Date.now().toString();
+    movieInDb._id = Date.now();
     movies.push(movieInDb);
   }
 

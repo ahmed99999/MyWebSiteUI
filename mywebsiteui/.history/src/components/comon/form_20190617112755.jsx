@@ -10,10 +10,11 @@ class Form extends Component {
     }
 
     validateProperty = ({ name, value }) => {
-        const obj = { [name]: value };
-        const schema = { [name]: this.schema[name] };
-        const { error } = Joi.validate(obj, schema);
-        return (!error) ? null : error.details[0].message;
+        console.log(name, value);
+        // const obj = { [name]: value };
+        // const schema = { [name]: this.schema[name] };
+        // const { error } = Joi.validate(obj, schema);
+        // return (!error) ? null : error.details[0].message;
     };
 
     validate = () => {
@@ -60,7 +61,7 @@ class Form extends Component {
                         <option
                             key={genre._id}
                             defaultValue={(genre._id === id) ? genre.name : ''}
-                            value={genre._id}
+                            value={genre.name}
                         >
                             {genre.name}
                         </option>

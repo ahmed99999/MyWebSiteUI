@@ -11,7 +11,7 @@ class MovieDetails extends Form {
             title: '',
             genreId: '',
             numberInStock: 0,
-            dailyRentalRate: 0
+            rate: 0
         },
         genres: [],
         errors: {}
@@ -21,7 +21,7 @@ class MovieDetails extends Form {
         console.log('movies submitted');
         saveMovie(this.state.data);
         this.props.history.push('/movies');
-    };
+    }
 
     componentDidMount() {
         const genres = getGenres();
@@ -43,20 +43,20 @@ class MovieDetails extends Form {
             title: movie.title,
             genreId: movie.genre._id,
             numberInStock: movie.numberInStock,
-            dailyRentalRate: movie.dailyRentalRate
+            rate: movie.dailyRentalRate
         };
-    };
+    }
 
     schema = {
-        _id: Joi.string(),
         title: Joi.string().min(3).max(30).required(),
         numberInStock: Joi.number().min(0).max(100).required(),
-        dailyRentalRate: Joi.number().min(0).max(10).required(),
+        rate: Joi.number().min(0).max(10).required(),
         genreId: Joi.string().required()
     };
 
     render() {
         const { genres, data } = this.state;
+        console.log(this.validate());
         return (
             <div className="row">
                 <div className="col-1"></div>
@@ -66,7 +66,7 @@ class MovieDetails extends Form {
                         {this.renderInput('title', 'Title', 'text')}
                         {this.renderSelect(genres, data.genreId, 'Genre', 'genreId')}
                         {this.renderInput('numberInStock', 'Stock', 'number')}
-                        {this.renderInput('dailyRentalRate', 'Rate', 'number')}
+                        {this.renderInput('rate', 'Rate', 'number')}
                         {this.renderButton('save')}
                     </form>
                 </div>

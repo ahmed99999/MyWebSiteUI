@@ -51,16 +51,16 @@ class Form extends Component {
         this.setState({ data, errors });
     };
 
-    renderSelect = (genres, id, label, name) => {
+    renderSelect = (genres, id, label) => {
         return (
             <div className="form-group">
                 <label htmlFor={id}>{label}</label>
-                <select className="form-control" id={id} name={name} onChange={this.handleChange}>
+                <select className="form-control" id={id} name={id} onChange={this.handleChange}>
                     {genres.map(genre => (
                         <option
                             key={genre._id}
                             defaultValue={(genre._id === id) ? genre.name : ''}
-                            value={genre._id}
+                            value={genre.name}
                         >
                             {genre.name}
                         </option>

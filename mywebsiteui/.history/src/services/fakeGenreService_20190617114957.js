@@ -5,5 +5,5 @@ const genres = [
 ];
 
 export function getGenres() {
-  return genres.map(g => g);
+  return genres ;
 }

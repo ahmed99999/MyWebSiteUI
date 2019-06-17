@@ -64,7 +64,7 @@ class Movies extends Component {
     };
 
     handleGenre = (genreName) => {
-        this.setState({ currentGenre: genreName, searchOrGenre: true , searchBarValue: "", currentPage: 1 });
+        this.setState({ currentGenre: genreName });
     };
 
     handelSort = sortWith => {
@@ -73,16 +73,20 @@ class Movies extends Component {
 
     handelSearchBarChange = searchBarValue  => {
         const searchOrGenre = false;
-        this.setState({ searchOrGenre, searchBarValue, currentPage: 1, currentGenre:'' });
+        this.setState({ searchOrGenre, searchBarValue, currentPage: 1 });
     };
 
     filterMovies = ( movies, currentGenre ) => {
         const { searchOrGenre, searchBarValue } = this.state;
-        return ( searchOrGenre ) ? movies.filter(m => {
-            return m.genre.name === currentGenre || currentGenre === 'All Genres';
-        }) : movies.filter( m => {
-            return m.title.toLowerCase().indexOf( searchBarValue ) >= 0 ;
-        });
+        if ( searchOrGenre ) {
+            return movies.filter(m => {
+                return m.genre.name === currentGenre || currentGenre === 'All Genres';
+            });
+        } else {
+            return movies.filter( m => {
+                return m.title.toLowerCase().indexOf( searchBarValue ) >= 0 ;
+            });
+        }
     };
 
     getPagedData = () => {
@@ -111,12 +115,7 @@ class Movies extends Component {
             <div className="row">
                 <div className="col-9">
                     <p>showing {paginatedMovies.length} movies in the dataBase.</p>
-                    <Link
-                        className="btn btn-primary"
-                        to="/movies/new"
-                    >
-                        New Movie
-                    </Link>
+                    <Link className="btn btn-primary" to="/movies/new" >New Movie</Link>
                     <SearchBar
                         onChange={this.handelSearchBarChange}
                         searchQuery={searchBarValue}

@@ -60,7 +60,7 @@ class Form extends Component {
                         <option
                             key={genre._id}
                             defaultValue={(genre._id === id) ? genre.name : ''}
-                            value={genre._id}
+                            value={genre.name}
                         >
                             {genre.name}
                         </option>

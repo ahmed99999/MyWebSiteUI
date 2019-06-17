@@ -38,29 +38,32 @@ class Form extends Component {
         if (errors) return;
         this.doSubmit();
     };
+    // { currentTarget: input }
+    handleChange = (e) => {
+        console.log(e.currentTarget());
+        return;
+        // const errors = { ...this.state.errors };
+        // const errorMessage = this.validateProperty(input);
+        // if (errorMessage) errors[input.name] = errorMessage;
+        // else delete errors[input.name];
 
-    handleChange = ({ currentTarget: input }) => {
-        const errors = { ...this.state.errors };
-
-        const errorMessage = this.validateProperty(input);
-        if (errorMessage) errors[input.name] = errorMessage;
-        else delete errors[input.name];
-
-        const data = { ...this.state.data }
-        data[input.name] = input.value;
-        this.setState({ data, errors });
+        // const data = { ...this.state.data }
+        // data[input.name] = input.value;
+        // this.setState({ data, errors });
     };
 
-    renderSelect = (genres, id, label, name) => {
+    renderSelect = (genres, id, label) => {
+        // const error = this.state.errors.name;
+        console.log(id);
         return (
             <div className="form-group">
                 <label htmlFor={id}>{label}</label>
-                <select className="form-control" id={id} name={name} onChange={this.handleChange}>
+                <select className="form-control" id={id} name={id} value="" onChange={this.handleChange}>
                     {genres.map(genre => (
                         <option
                             key={genre._id}
                             defaultValue={(genre._id === id) ? genre.name : ''}
-                            value={genre._id}
+                            value={genre.name}
                         >
                             {genre.name}
                         </option>

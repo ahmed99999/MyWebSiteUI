@@ -111,12 +111,7 @@ class Movies extends Component {
             <div className="row">
                 <div className="col-9">
                     <p>showing {paginatedMovies.length} movies in the dataBase.</p>
-                    <Link
-                        className="btn btn-primary"
-                        to="/movies/new"
-                    >
-                        New Movie
-                    </Link>
+                    <Link className="btn btn-primary" to="/movies/new" >New Movie</Link>
                     <SearchBar
                         onChange={this.handelSearchBarChange}
                         searchQuery={searchBarValue}

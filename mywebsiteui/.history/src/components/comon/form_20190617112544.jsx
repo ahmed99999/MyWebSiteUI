@@ -10,10 +10,11 @@ class Form extends Component {
     }
 
     validateProperty = ({ name, value }) => {
-        const obj = { [name]: value };
-        const schema = { [name]: this.schema[name] };
-        const { error } = Joi.validate(obj, schema);
-        return (!error) ? null : error.details[0].message;
+        console.log(name, value);
+        // const obj = { [name]: value };
+        // const schema = { [name]: this.schema[name] };
+        // const { error } = Joi.validate(obj, schema);
+        // return (!error) ? null : error.details[0].message;
     };
 
     validate = () => {
@@ -51,16 +52,16 @@ class Form extends Component {
         this.setState({ data, errors });
     };
 
-    renderSelect = (genres, id, label, name) => {
+    renderSelect = (genres, id, label) => {
         return (
             <div className="form-group">
                 <label htmlFor={id}>{label}</label>
-                <select className="form-control" id={id} name={name} onChange={this.handleChange}>
+                <select className="form-control" id={id} name={id} onChange={this.handleChange}>
                     {genres.map(genre => (
                         <option
                             key={genre._id}
                             defaultValue={(genre._id === id) ? genre.name : ''}
-                            value={genre._id}
+                            value={genre.name}
                         >
                             {genre.name}
                         </option>

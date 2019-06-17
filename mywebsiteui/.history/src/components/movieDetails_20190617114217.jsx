@@ -21,7 +21,7 @@ class MovieDetails extends Form {
         console.log('movies submitted');
         saveMovie(this.state.data);
         this.props.history.push('/movies');
-    };
+    }
 
     componentDidMount() {
         const genres = getGenres();
@@ -45,7 +45,7 @@ class MovieDetails extends Form {
             numberInStock: movie.numberInStock,
             dailyRentalRate: movie.dailyRentalRate
         };
-    };
+    }
 
     schema = {
         _id: Joi.string(),
