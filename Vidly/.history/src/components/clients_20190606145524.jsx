@@ -1,0 +1,29 @@
+import React, { Component } from 'react';
+import { getClients } from '../services/fakeClients';
+import Client from './client';
+
+class Clients extends Component {
+    state = { 
+        clients : getClients()
+    }
+
+    render() {
+        const { clients } = this.state;
+        return (
+            <table id = "clients" className="table">
+                <thead>
+                    <tr>
+                        <th>Clients</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {clients.map( client => (
+                        <Client key={client.id} client = {client} />
+                    ))}
+                </tbody>
+            </table>
+        );
+    }
+}
+ 
+export default Clients;

@@ -1,0 +1,28 @@
+import React, { Component } from 'react';
+import { getMovies } from './../services/fakeMovieService';
+
+class Movies extends Component {
+    state = {
+        movies: getMovies()
+    }
+
+    handleDelete = movie => {
+
+    }
+
+    render() { 
+        return ( 
+            <table>
+                <tr>
+                    <tr>Title</tr>
+                    <tr>Genre</tr>
+                    <tr>Stock</tr>
+                    <tr>Rate</tr>
+                    <tr></tr>
+                </tr>
+            </table> 
+        );
+    }
+}
+ 
+export default Movies;
